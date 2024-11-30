@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Kart Bazar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #c00600;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .back-button {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .checkout-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c00600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #c00600;
+            box-shadow: 0 0 0 2px rgba(192, 6, 0, 0.1);
+        }
+
+        .order-summary {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            align-self: start;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c00600;
+        }
+
+        .order-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-name {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .total {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #c00600;
+        }
+
+        .checkout-btn {
+            background: #c00600;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-btn:hover {
+            background: #a00500;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 6, 0, 0.2);
+        }
+
+        .payment-info {
+            background: #fff3e0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .payment-info h3 {
+            color: #e65100;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bkash-number {
+            font-weight: bold;
+            color: #c00600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="cart.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Cart</span>
+            </a>
+            <a href="index.html" class="logo">Kart Bazar</a>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <h1 class="page-title">Checkout</h1>
+        
+        <!-- Order Summary Section -->
+        <div class="order-summary">
+            <h2 class="summary-title">Order Summary</h2>
+            <div id="orderItems" class="order-items">
+                <!-- Order items will be dynamically inserted here -->
+            </div>
+            <div class="payment-info">
+                <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
+                <p>Please send the total amount to our bKash number:</p>
+                <p class="bkash-number">01XXXXXXXXX</p>
+                <p>After sending money, please provide the Transaction ID below.</p>
+            </div>
+            <div class="total">
+                <span>Total Amount:</span>
+                <span>BDT <span id="totalAmount">0</span></span>
+            </div>
+        </div>
+
+        <!-- Checkout Form Section -->
+        <form id="checkoutForm" class="checkout-form">
+            <h2 class="form-title">Billing Details</h2>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="bkashNumber">bKash Number</label>
+                <input type="tel" id="bkashNumber" required placeholder="Enter bKash number used for payment">
+            </div>
+            <div class="form-group">
+                <label for="transactionId">Transaction ID</label>
+                <input type="text" id="transactionId" required placeholder="Enter bKash transaction ID">
+            </div>
+            <button type="submit" class="checkout-btn">
+                <i class="fas fa-lock"></i>
+                Place Order
+            </button>
+        </form>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>
